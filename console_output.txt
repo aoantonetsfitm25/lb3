@@ -1,0 +1,37 @@
+СЦЕНАРІЙ 1 — try/except для перетворення числа
+Успіх: 27
+Помилковий шлях: INVALID_INPUT: поле 'ціле число', значення 'двадцять'
+Первинна причина: ValueError
+
+СЦЕНАРІЙ 2 — except (KeyError, TypeError)
+Успіх: dark
+Очікувана помилка KeyError: 'theme'
+Очікувана помилка TypeError: 'NoneType' object is not subscriptable
+
+СЦЕНАРІЙ 3 — with + try/except/else/finally
+else: файл record.json прочитано успішно
+finally: обробку record.json завершено; with закрив файл
+Успішний результат: {'id': 7, 'status': 'ready'}
+finally: обробку missing.json завершено; with закрив файл
+Перехоплено конкретний тип: NOT_FOUND: ресурс 'missing.json' відсутній
+Причина через __cause__: FileNotFoundError
+Журнал після повторного raise: ["NOT_FOUND: Запис 'missing.json' не знайдено."]
+
+СЦЕНАРІЙ 4 — перехоплення категорії AppError
+Базовий клас перехопив BusinessRuleError: BUSINESS_RULE: сума >= 0 (отримано -5)
+to_dict(): {'type': 'BusinessRuleError', 'code': 'BUSINESS_RULE', 'message': "Порушено правило 'сума >= 0': отримано -5"}
+Конкретний клас перехопив: BUSINESS_RULE: статус (перехід заборонений)
+
+СЦЕНАРІЙ 5 — __all__ та інтроспекція
+Імена з __all__: ['AppError', 'BusinessRuleError', 'InputValidationError', 'RecordNotFoundError', 'main']
+help(parse_integer):
+Help on function parse_integer in module resilient_app.services.processor:
+
+parse_integer(raw: str) -> int
+    Перетворює текст на ціле число з доменним повідомленням про помилку.
+
+    Args:
+        raw (str): Початковий текст.
+__doc__: Перетворює текст на ціле число з доменним повідомленням про помилку.
+__name__: parse_integer
+__annotations__: {'raw': <class 'str'>, 'return': <class 'int'>}
